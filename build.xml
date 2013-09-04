@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project BankingWrapper with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="/Users/robin/Documents/Code/soc_ws2013/soc1_bankingWrapper/deploy/bankingWrapper.jar">
+            <manifest>
+                <attribute name="Main-Class" value="edu.kit.aifb.eorg.banking.wrapper.test.TestWsServer"/>
+                <!-- <attribute name="Rsrc-Main-Class" value="edu.kit.aifb.eorg.banking.wrapper.test.TestWsServer"/> -->
+                <attribute name="Class-Path" value="./ jackson-annotations-2.2.0.jar jackson-core-2.2.0.jar jackson-databind-2.2.0.jar jersey-client-1.17.1.jar jersey-core-1.17.1.jar"/>
+                <!-- <attribute name="Rsrc-Class-Path" value="./ annotations-api.jar catalina-ant.jar catalina-ha.jar catalina-tribes.jar catalina.jar ecj-4.2.2.jar el-api.jar jasper-el.jar jasper.jar jsp-api.jar servlet-api.jar tomcat-api.jar tomcat-coyote.jar tomcat-dbcp.jar tomcat-i18n-es.jar tomcat-i18n-fr.jar tomcat-i18n-ja.jar tomcat-jdbc.jar tomcat-util.jar jackson-annotations-2.2.0.jar jackson-core-2.2.0.jar jackson-databind-2.2.0.jar jersey-client-1.17.1.jar jersey-core-1.17.1.jar"/> -->
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="/Users/robin/Documents/Code/soc_ws2013/soc1_bankingWrapper/build/classes"/>
+            <!-- <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="annotations-api.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="catalina-ant.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="catalina-ha.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="catalina-tribes.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="catalina.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="ecj-4.2.2.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="el-api.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="jasper-el.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="jasper.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="jsp-api.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="servlet-api.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-api.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-coyote.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-dbcp.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-i18n-es.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-i18n-fr.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-i18n-ja.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-jdbc.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/apache-tomcat-7.0.40/lib" includes="tomcat-util.jar"/> -->
+            <zipfileset dir="/Users/robin/Documents/Code/soc_ws2013/soc1_bankingWrapper/WebContent/WEB-INF/lib" includes="jackson-annotations-2.2.0.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/soc_ws2013/soc1_bankingWrapper/WebContent/WEB-INF/lib" includes="jackson-core-2.2.0.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/soc_ws2013/soc1_bankingWrapper/WebContent/WEB-INF/lib" includes="jackson-databind-2.2.0.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/soc_ws2013/soc1_bankingWrapper/WebContent/WEB-INF/lib" includes="jersey-client-1.17.1.jar"/>
+            <zipfileset dir="/Users/robin/Documents/Code/soc_ws2013/soc1_bankingWrapper/WebContent/WEB-INF/lib" includes="jersey-core-1.17.1.jar"/>
+        </jar>
+    </target>
+</project>
