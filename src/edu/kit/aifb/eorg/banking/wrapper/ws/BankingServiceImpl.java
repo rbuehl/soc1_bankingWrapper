@@ -28,7 +28,7 @@ public class BankingServiceImpl implements BankingServiceInterface {
 
 		Client client = Client.create();
 		WebResource webResource = client
-				.resource("http://ec2-50-19-50-143.compute-1.amazonaws.com:9000/accounts/"
+				.resource("http://ec2-54-221-106-18.compute-1.amazonaws.com:9000/accounts/"
 						+ id + "/" + requestType);
 
 		String response = webResource.get(String.class);
