@@ -14,15 +14,29 @@ public class TransactionTO {
 	public Long id;
 	public AccountTO accountFrom;
 	public AccountTO accountTo;
-	public String reference;
+	public String purpose;
 	public Date date;
 	public BigDecimal value;	//TODO:Format to 2 Decimals
 	public Currency currency;
+    
+	public String category;
+    public Status status;  
 	
-	public enum Currency {  
-        USD, EUR, GBP  
+    /**
+     * ENUMERATIONS
+     */
+
+    public enum Currency {
+        USD, EUR, GBP
     }
 
+    public enum Status{
+        Processed, Pending, Error
+    }
+
+
+    
+	
 //	public Long getId() {
 //		return id;
 //	}
