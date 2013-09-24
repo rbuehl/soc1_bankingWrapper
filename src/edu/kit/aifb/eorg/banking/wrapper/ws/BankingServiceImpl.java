@@ -15,6 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
+import edu.kit.aifb.eorg.banking.wrapper.test.TestWsServer;
+
 @WebService(endpointInterface = "edu.kit.aifb.eorg.banking.wrapper.ws.BankingServiceInterface")
 public class BankingServiceImpl implements BankingServiceInterface {
 
@@ -24,12 +26,14 @@ public class BankingServiceImpl implements BankingServiceInterface {
 
 		// TODO Call RESTful service.
 
-		String requestType = "debit";
+		String resource = "/accounts/";
+		String suffix ="/debit";
 
 		Client client = Client.create();
 		WebResource webResource = client
-				.resource("http://ec2-54-221-106-18.compute-1.amazonaws.com:9000/accounts/"
-						+ id + "/" + requestType);
+//				.resource("http://ec2-54-221-106-18.compute-1.amazonaws.com:9000/"
+				.resource(TestWsServer.endpointJSON + resource + 
+						+ id + suffix);
 
 		String response = webResource.get(String.class);
 		System.out.println(response);
@@ -53,12 +57,14 @@ public class BankingServiceImpl implements BankingServiceInterface {
 			@WebParam(name = "accountID") Long id) {
 		
 		
-		String requestType = "credit";
+		String resource = "/accounts/";
+		String suffix ="/credit";
 
 		Client client = Client.create();
 		WebResource webResource = client
-				.resource("http://ec2-50-19-50-143.compute-1.amazonaws.com:9000/accounts/"
-						+ id + "/" + requestType);
+//				.resource("http://ec2-54-221-106-18.compute-1.amazonaws.com:9000/"
+				.resource(TestWsServer.endpointJSON + resource + 
+						+ id + suffix);
 
 		String response = webResource.get(String.class);
 		System.out.println(response);
