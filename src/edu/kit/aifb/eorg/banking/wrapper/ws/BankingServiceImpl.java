@@ -9,6 +9,7 @@ import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,6 +43,7 @@ public class BankingServiceImpl implements BankingServiceInterface {
 		
 		// TODO Transform JSON to TransactionTO
 		ObjectMapper mapper = new ObjectMapper();
+//        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT)
 		try {
 			transactions = mapper.readValue(response, TransactionTO[].class);
 		} catch ( IOException e) {
