@@ -23,6 +23,6 @@ public class AccountTO {
     public Type typeOf;
 
     public enum Type{
-	        Checking, Savings, Loan
+        external, depot, savings, credit_card, checking
     }
 }

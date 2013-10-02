@@ -26,7 +26,7 @@ public class CustomerTO {
     public String ageGroup;
 
     public enum Sex{
-        male, female
+        m, w
     }
 
 }

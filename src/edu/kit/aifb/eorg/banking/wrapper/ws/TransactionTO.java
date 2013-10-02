@@ -30,11 +30,11 @@ public class TransactionTO {
      */
 
     public enum Currency {
-        USD, EUR, GBP
+        CHF, EUR, USD
     }
 
     public enum Status{
-        Processed, Pending, Error
+        Processed, Pending, Error, Rejected
     }
 	
 }
