@@ -37,7 +37,7 @@ public class BankingServiceImpl implements BankingServiceInterface {
 						+ id + suffix);
 
 		String response = webResource.get(String.class);
-		System.out.println(response);
+//		System.out.println(response);
 
 		TransactionTO[] transactions = null;
 		
@@ -69,7 +69,7 @@ public class BankingServiceImpl implements BankingServiceInterface {
 						+ id + suffix);
 
 		String response = webResource.get(String.class);
-		System.out.println(response);
+//		System.out.println(response);
 
 		// TODO Transform JSON to TransactionTO
 		ObjectMapper mapper = new ObjectMapper();
