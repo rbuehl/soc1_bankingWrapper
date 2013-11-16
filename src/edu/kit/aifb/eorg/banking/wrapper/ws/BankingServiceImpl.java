@@ -83,4 +83,33 @@ public class BankingServiceImpl implements BankingServiceInterface {
 		return transactions;
 	}
 
+	@Override
+	public String createTransaction(Long fromId, Long toId, String currency,
+			String category, String status, String purpose, BigDecimal value) {
+		String result = null;
+		
+		String resource = "/transactions";
+		String suffix ="/add";
+	//	String params="?"+ "fromId="+ fromId + "&" + "toId=" + toId + "&" + "currency=\"" + currency + "\"&" + "category=\"" + category +"\"&" + "status=\"" + status + "\"&" + "purpose=\"" + purpose + "\"&" + "value=\"" + value + "\"";
+		String params="?"+ "fromId="+ fromId + "&" + "toId=" + toId + "&" + "currency=" + currency + "&" + "category=" + category +"&" + "status=" + status + "&" + "purpose=" + purpose + "&" + "value=" + value + "";
+		System.out.println(resource+suffix+params);
+		
+		Client client = Client.create();
+		WebResource webResource = client
+				.resource(TestWsServer.endpointJSON + resource + suffix + params);
+
+		String response = webResource.get(String.class);
+		System.out.println(response);
+
+		// TODO Transform JSON to TransactionTO
+		ObjectMapper mapper = new ObjectMapper(); 
+		try {
+			result = mapper.readValue(response, String.class);
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }
