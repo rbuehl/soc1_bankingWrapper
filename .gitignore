@@ -1,6 +1,8 @@
 .DS_STORE
 *.class
 
+# build folder
+/build
 
 # Package Files #
 *.war
