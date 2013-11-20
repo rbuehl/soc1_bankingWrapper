@@ -98,10 +98,9 @@ public class BankingServiceImpl implements BankingServiceInterface {
 		WebResource webResource = client
 				.resource(TestWsServer.endpointJSON + resource + suffix + params);
 
-		String response = webResource.get(String.class);
+		String response = webResource.post(String.class);
 		System.out.println(response);
 
-		// TODO Transform JSON to TransactionTO
 		ObjectMapper mapper = new ObjectMapper(); 
 		try {
 			result = mapper.readValue(response, String.class);
