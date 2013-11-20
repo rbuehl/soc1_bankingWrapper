@@ -1,7 +1,9 @@
 package edu.kit.aifb.eorg.banking.wrapper.ws;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,14 +86,18 @@ public class BankingServiceImpl implements BankingServiceInterface {
 	}
 
 	@Override
-	public String createTransaction(Long fromId, Long toId, String currency,
+	public TransactionTO createTransaction(Long fromId, Long toId, String currency,
 			String category, String status, String purpose, BigDecimal value) {
-		String result = null;
+		TransactionTO result = null;
+		
+		try {
+		purpose = URLEncoder.encode(purpose, "UTF-8");
 		
 		String resource = "/transactions";
 		String suffix ="/add";
 	//	String params="?"+ "fromId="+ fromId + "&" + "toId=" + toId + "&" + "currency=\"" + currency + "\"&" + "category=\"" + category +"\"&" + "status=\"" + status + "\"&" + "purpose=\"" + purpose + "\"&" + "value=\"" + value + "\"";
 		String params="?"+ "fromId="+ fromId + "&" + "toId=" + toId + "&" + "currency=" + currency + "&" + "category=" + category +"&" + "status=" + status + "&" + "purpose=" + purpose + "&" + "value=" + value + "";
+
 		System.out.println(resource+suffix+params);
 		
 		Client client = Client.create();
@@ -102,8 +108,7 @@ public class BankingServiceImpl implements BankingServiceInterface {
 		System.out.println(response);
 
 		ObjectMapper mapper = new ObjectMapper(); 
-		try {
-			result = mapper.readValue(response, String.class);
+			result = mapper.readValue(response, TransactionTO.class);
 		} catch ( IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

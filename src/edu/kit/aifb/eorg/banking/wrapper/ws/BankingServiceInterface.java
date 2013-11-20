@@ -10,7 +10,7 @@ public interface BankingServiceInterface {
 	
 	TransactionTO[] getDebitsForAccount(@WebParam(name="accountID") Long id);
 	TransactionTO[] getCreditsForAccount(@WebParam(name="accountID") Long id);
-	String createTransaction(
+	TransactionTO createTransaction(
 			@WebParam(name="accountFromID") Long fromId, 
 			@WebParam(name="accountToID") Long toId,
 			@WebParam(name="currency") String currency, 
