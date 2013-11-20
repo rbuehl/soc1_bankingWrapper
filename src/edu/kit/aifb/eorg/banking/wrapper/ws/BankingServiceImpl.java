@@ -87,12 +87,14 @@ public class BankingServiceImpl implements BankingServiceInterface {
 
 	@Override
 	public TransactionTO createTransaction(Long fromId, Long toId, String currency,
-			String category, String status, String purpose, BigDecimal value) {
+			String category, String purpose, BigDecimal value) {
 		TransactionTO result = null;
 		
 		try {
 		purpose = URLEncoder.encode(purpose, "UTF-8");
 		
+		String status = "Processed";
+		if (Math.random()>0.8) status = "Error";
 		String resource = "/transactions";
 		String suffix ="/add";
 	//	String params="?"+ "fromId="+ fromId + "&" + "toId=" + toId + "&" + "currency=\"" + currency + "\"&" + "category=\"" + category +"\"&" + "status=\"" + status + "\"&" + "purpose=\"" + purpose + "\"&" + "value=\"" + value + "\"";

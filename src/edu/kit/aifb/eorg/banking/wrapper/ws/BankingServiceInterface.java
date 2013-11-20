@@ -15,7 +15,7 @@ public interface BankingServiceInterface {
 			@WebParam(name="accountToID") Long toId,
 			@WebParam(name="currency") String currency, 
 			@WebParam(name="category") String category,
-			@WebParam(name="status") String status, 
+			//@WebParam(name="status") String status, 
 			@WebParam(name="purpose") String purpose, 			
 			@WebParam(name="value") BigDecimal value);
 }
