@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
@@ -20,10 +21,22 @@ import com.sun.jersey.api.client.WebResource;
 
 import edu.kit.aifb.eorg.banking.wrapper.test.TestWsServer;
 
-@WebService(endpointInterface = "edu.kit.aifb.eorg.banking.wrapper.ws.BankingServiceInterface")
-public class BankingServiceImpl implements BankingServiceInterface {
+/**** DE - Remember to also change the DB  ***
+@WebService(
+        portName = "DEBankingPort",
+        serviceName = "DEBankingService",
+        targetNamespace = "http://bank.de/DEbanking"
+)    */
+/*** CH - Remember to also change the DB ***/
+ @WebService(
+ portName = "SwissBankingPort",
+ serviceName = "SwissBankingService",
+ targetNamespace = "http://bank.ch/swissbanking"
+ )
+//public class BankingServiceImpl implements BankingServiceInterface {
+public class BankingServiceImpl{
 
-	@Override
+	@WebMethod
 	public TransactionTO[] getDebitsForAccount(
 			@WebParam(name = "accountID") Long id) {
 
@@ -56,7 +69,7 @@ public class BankingServiceImpl implements BankingServiceInterface {
 		return transactions;
 	}
 
-	@Override
+	@WebMethod
 	public TransactionTO[] getCreditsForAccount(
 			@WebParam(name = "accountID") Long id) {
 		
@@ -85,7 +98,7 @@ public class BankingServiceImpl implements BankingServiceInterface {
 		return transactions;
 	}
 
-	@Override
+	@WebMethod
 	public TransactionTO createTransaction(Long fromId, Long toId, String currency,
 			String category, String purpose, BigDecimal value) {
 		TransactionTO result = null;
