@@ -21,18 +21,20 @@ import com.sun.jersey.api.client.WebResource;
 
 import edu.kit.aifb.eorg.banking.wrapper.test.TestWsServer;
 
-/**** DE - Remember to also change the DB  ***
+/**** DE - Remember to also change the DB  ***/
 @WebService(
+        name = "DEBankingPortType",
         portName = "DEBankingPort",
         serviceName = "DEBankingService",
         targetNamespace = "http://bank.de/DEbanking"
-)    */
-/*** CH - Remember to also change the DB ***/
+)   /* */
+/*** CH - Remember to also change the DB ***
  @WebService(
- portName = "SwissBankingPort",
- serviceName = "SwissBankingService",
- targetNamespace = "http://bank.ch/swissbanking"
- )
+     name = "SwissBankingPortType",
+     portName = "SwissBankingPort",
+     serviceName = "SwissBankingService",
+     targetNamespace = "http://bank.ch/swissbanking"
+ )                                    /**/
 //public class BankingServiceImpl implements BankingServiceInterface {
 public class BankingServiceImpl{
 
@@ -70,8 +72,8 @@ public class BankingServiceImpl{
 	}
 
 	@WebMethod
-	public TransactionTO[] getCreditsForAccount(
-			@WebParam(name = "accountID") Long id) {
+    public TransactionTO[] getCreditsForAccount(@WebParam(name="accountID") Long id)
+    {
 		
 		
 		String resource = "/accounts/";
@@ -99,14 +101,22 @@ public class BankingServiceImpl{
 	}
 
 	@WebMethod
-	public TransactionTO createTransaction(Long fromId, Long toId, String currency,
-			String category, String purpose, BigDecimal value) {
+	public TransactionTO createTransaction(
+            @WebParam(name="accountFromID") Long fromId,
+            @WebParam(name="accountToID") Long toId,
+            @WebParam(name="currency") String currency,
+            @WebParam(name="category") String category,
+            //@WebParam(name="status") String status,
+            @WebParam(name="purpose") String purpose,
+            @WebParam(name="value") BigDecimal value){
+
 		TransactionTO result = null;
 		
 		try {
 		purpose = URLEncoder.encode(purpose, "UTF-8");
 		
 		String status = "Processed";
+		/** Comment if SwissBank **/
 		if (Math.random()>0.8) status = "Error";
 		String resource = "/transactions";
 		String suffix ="/add";
@@ -130,5 +140,53 @@ public class BankingServiceImpl{
 		}
 		return result;
 	}
+
+
+    @WebMethod
+    public TransactionTO createTransactionWithDate(
+            @WebParam(name="accountFromID") Long fromId,
+            @WebParam(name="accountToID") Long toId,
+            @WebParam(name="currency") String currency,
+            @WebParam(name="category") String category,
+            //@WebParam(name="status") String status,
+            @WebParam(name="purpose") String purpose,
+            @WebParam(name="value") BigDecimal value,
+            @WebParam(name="date") String date){
+
+        TransactionTO result = null;
+
+        try {
+            purpose = URLEncoder.encode(purpose, "UTF-8");
+
+            String status = "Processed";
+            String resource = "/transactions";
+            String suffix ="/addWithDate";
+            //	String params="?"+ "fromId="+ fromId + "&" + "toId=" + toId + "&" + "currency=\"" + currency + "\"&" + "category=\"" + category +"\"&" + "status=\"" + status + "\"&" + "purpose=\"" + purpose + "\"&" + "value=\"" + value + "\"";
+            String params="?"+ "fromId="+ fromId + "&" + "toId=" + toId +
+                    "&" + "currency=" + currency +
+                    "&" + "category=" + category +
+                    "&" + "status=" + status +
+                    "&" + "purpose=" + purpose +
+                    "&" + "value=" + value +
+                    "&" + "date=" + date;
+
+            System.out.println(resource+suffix+params);
+
+            Client client = Client.create();
+            WebResource webResource = client
+                    .resource(TestWsServer.endpointJSON + resource + suffix + params);
+
+            String response = webResource.post(String.class);
+            System.out.println(response);
+
+            ObjectMapper mapper = new ObjectMapper();
+            result = mapper.readValue(response, TransactionTO.class);
+            return result;
+        } catch ( IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 
 }
